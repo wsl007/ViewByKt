@@ -11,6 +11,9 @@
             <com.wsl.viewbykt.view.RingDragView
                     android:layout_width="match_parent"
                     android:layout_height="180dp"/>
+            <com.wsl.viewbykt.view.CubicCircleView
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
