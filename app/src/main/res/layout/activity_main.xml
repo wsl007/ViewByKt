@@ -14,6 +14,16 @@
             <com.wsl.viewbykt.view.CubicCircleView
                     android:layout_width="match_parent"
                     android:layout_height="180dp"/>
+            <com.wsl.viewbykt.view.CubicSwitchView
+                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:layout_marginLeft="45dp"
+                    android:layout_marginRight="45dp"
+                    app:ss_leftText="man"
+                    app:ss_rightText="woman"
+                    app:ss_leftIcon="@drawable/ic_man"
+                    app:ss_rightIcon="@drawable/ic_woman"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
