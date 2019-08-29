@@ -8,6 +8,11 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+            <Button
+                    android:id="@+id/btn"
+                    android:text="自定义Behavior"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
             <com.wsl.viewbykt.view.RingDragView
                     android:layout_width="match_parent"
                     android:layout_height="180dp"/>

@@ -28,11 +28,20 @@ class CubicSwitchView : View {
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    ) {
         init(attrs, defStyleAttr)
     }
 
-    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) : super(
+    constructor(
+        context: Context,
+        attrs: AttributeSet?,
+        defStyleAttr: Int,
+        defStyleRes: Int
+    ) : super(
         context, attrs, defStyleAttr, defStyleRes
     ) {
         init(attrs, defStyleAttr, defStyleRes)
@@ -100,7 +109,12 @@ class CubicSwitchView : View {
     }
 
     private fun init(attrs: AttributeSet?, defStyleAttr: Int = 0, defStyleRes: Int = 0) {
-        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CubicSwitchView, defStyleAttr, defStyleRes)
+        val typedArray = context.obtainStyledAttributes(
+            attrs,
+            R.styleable.CubicSwitchView,
+            defStyleAttr,
+            defStyleRes
+        )
 
         leftIcon = typedArray.getDrawable(R.styleable.CubicSwitchView_ss_leftIcon)
         leftText = typedArray.getString(R.styleable.CubicSwitchView_ss_leftText) ?: leftText
@@ -108,25 +122,39 @@ class CubicSwitchView : View {
         rightIcon = typedArray.getDrawable(R.styleable.CubicSwitchView_ss_rightIcon)
         rightText = typedArray.getString(R.styleable.CubicSwitchView_ss_rightText) ?: rightText
 
-        iconSize = typedArray.getDimensionPixelSize(R.styleable.CubicSwitchView_ss_iconSize, iconSize)
-        iconPadding = typedArray.getDimensionPixelSize(R.styleable.CubicSwitchView_ss_iconPadding, iconPadding)
+        iconSize =
+            typedArray.getDimensionPixelSize(R.styleable.CubicSwitchView_ss_iconSize, iconSize)
+        iconPadding = typedArray.getDimensionPixelSize(
+            R.styleable.CubicSwitchView_ss_iconPadding,
+            iconPadding
+        )
 
-        textSize = typedArray.getDimensionPixelSize(R.styleable.CubicSwitchView_ss_textSize, textSize)
+        textSize =
+            typedArray.getDimensionPixelSize(R.styleable.CubicSwitchView_ss_textSize, textSize)
         selectedTextSize =
-            typedArray.getDimensionPixelSize(R.styleable.CubicSwitchView_ss_selectedTextSize, selectedTextSize)
+            typedArray.getDimensionPixelSize(
+                R.styleable.CubicSwitchView_ss_selectedTextSize,
+                selectedTextSize
+            )
 
         leftTextSize = selectedTextSize.toFloat()
         rightTextSize = textSize.toFloat()
 
         sliderBackgroundColor =
-            typedArray.getColor(R.styleable.CubicSwitchView_ss_sliderBackgroundColor, sliderBackgroundColor)
+            typedArray.getColor(
+                R.styleable.CubicSwitchView_ss_sliderBackgroundColor,
+                sliderBackgroundColor
+            )
 
         switchColor = typedArray.getColor(R.styleable.CubicSwitchView_ss_switchColor, switchColor)
 
         textColor = typedArray.getColor(R.styleable.CubicSwitchView_ss_textColor, textColor)
 
         animatonDuration =
-            typedArray.getInt(R.styleable.CubicSwitchView_ss_animationDuration, animatonDuration.toInt()).toLong()
+            typedArray.getInt(
+                R.styleable.CubicSwitchView_ss_animationDuration,
+                animatonDuration.toInt()
+            ).toLong()
 
         animationType = AnimationType.values()[typedArray.getInt(
             R.styleable.CubicSwitchView_ss_animationType,
@@ -139,7 +167,6 @@ class CubicSwitchView : View {
     private val connectionPath = Path()
     val xParam = 1 / 2f //Math.sin(Math.PI / 6).toFloat()
     val yParam = 0.86602540378f //Math.cos(Math.PI / 6).toFloat()
-
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         measureText()
@@ -208,7 +235,12 @@ class CubicSwitchView : View {
             0f, 0f, measuredWidth.toFloat(),
             (iconMarginTop + iconHeight + iconMarginBottom).toFloat()
         )
-        canvas.drawRoundRect(sliderBackgroundRect, sliderRadius, sliderRadius, sliderBackgroundPaint)
+        canvas.drawRoundRect(
+            sliderBackgroundRect,
+            sliderRadius,
+            sliderRadius,
+            sliderBackgroundPaint
+        )
 
         canvas.save()
 
@@ -220,7 +252,8 @@ class CubicSwitchView : View {
         val ocY = circleRadius
         val ocRadius = circleRadius * (if (isBefore) 1.0 - animatePercent else animatePercent)
 
-        val ccX = (circleRadius + widthSpace * (if (isBefore) 0.0 else abs(0.5 - animatePercent) * 2))
+        val ccX =
+            (circleRadius + widthSpace * (if (isBefore) 0.0 else abs(0.5 - animatePercent) * 2))
         val ccY = circleRadius
         val ccRadius = ocRadius
 
@@ -391,11 +424,12 @@ class CubicSwitchView : View {
             getBounceAnimator()
         )
         animatorSet?.start()
-        Log.i("tag","animatorSet click")
+        Log.i("tag", "animatorSet click")
     }
 
     private fun getLiquidAnimator(newCheckedState: Boolean): Animator {
-        val liquidAnimtor = ValueAnimator.ofFloat(animatePercent.toFloat(), if (newCheckedState) 1f else 0f)
+        val liquidAnimtor =
+            ValueAnimator.ofFloat(animatePercent.toFloat(), if (newCheckedState) 1f else 0f)
         liquidAnimtor.duration = animatonDuration
         liquidAnimtor.interpolator = AccelerateInterpolator()
         liquidAnimtor.addUpdateListener {

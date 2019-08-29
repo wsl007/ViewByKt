@@ -9,13 +9,17 @@ import android.view.MotionEvent
 import android.view.View
 
 /**
- * 半环形可拖动仪表盘
+ * 3/4环形可拖动仪表盘
  */
 class RingDragView : View {
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
+        context,
+        attrs,
+        defStyleAttr
+    )
 
     companion object {
         const val startDegree = 16
@@ -29,17 +33,16 @@ class RingDragView : View {
     private var mRadius = 0f
     private var insideRadius = 0f
     private lateinit var mArcRectF: RectF
-    private lateinit var mArcPaint: Paint
-    private lateinit var mLinePaint: Paint
-    private lateinit var mTextPaint: Paint
+    private var mArcPaint: Paint = Paint()
+    private var mLinePaint: Paint
+    private var mTextPaint: Paint
     private var scanDegrees = 0
     private lateinit var mSweepGradient: SweepGradient
     private var finalDegree = 0
-    private lateinit var detector: GestureDetector
+    private var detector: GestureDetector
     private var canMove = true
 
     init {
-        mArcPaint = Paint()
         mArcPaint.isAntiAlias = true
         mArcPaint.strokeWidth = circleWidth
         mArcPaint.color = Color.WHITE
@@ -56,7 +59,7 @@ class RingDragView : View {
         mTextPaint.textSize = 36f
         mTextPaint.textAlign = Paint.Align.CENTER
 
-        detector = GestureDetector(context, object : GestureDetector.OnGestureListener{
+        detector = GestureDetector(context, object : GestureDetector.OnGestureListener {
 
             override fun onDown(event: MotionEvent?): Boolean {
                 if (event == null)
@@ -142,12 +145,22 @@ class RingDragView : View {
                 return true
             }
 
-            override fun onFling(e1: MotionEvent?, event: MotionEvent?, velocityX: Float, velocityY: Float): Boolean {
+            override fun onFling(
+                e1: MotionEvent?,
+                event: MotionEvent?,
+                velocityX: Float,
+                velocityY: Float
+            ): Boolean {
                 Log.d("tag", "onFling旋转角度=$scanDegrees")
                 return true
             }
 
-            override fun onScroll(e1: MotionEvent?, event: MotionEvent?, distanceX: Float, distanceY: Float): Boolean {
+            override fun onScroll(
+                e1: MotionEvent?,
+                event: MotionEvent?,
+                distanceX: Float,
+                distanceY: Float
+            ): Boolean {
                 if (event == null || !canMove)
                     return true
                 parent.requestDisallowInterceptTouchEvent(true)
@@ -260,11 +273,11 @@ class RingDragView : View {
         canvas.drawArc(mArcRectF, 135f, scanDegrees.toFloat(), false, mArcPaint)
 
         for (i in 0 until 72) {
-            val startY = mArcRectF.bottom - circleWidth/2
+            val startY = mArcRectF.bottom - circleWidth / 2
             var top = startY + circleWidth
             if (i in 9..63) {
                 if (i % 9 == 0)
-                    top += padding/4
+                    top += padding / 4
                 canvas.drawLine(mCenterX, startY, mCenterX, top, mLinePaint)
             }
             canvas.rotate(5f, mCenterX, mCenterY)
@@ -274,13 +287,33 @@ class RingDragView : View {
         val x = Math.sqrt(c * c / 2.toDouble())
 
         val cY = mCenterY
-        canvas.drawText(startDegree.toString(), (mCenterX - x).toFloat(), (cY + x).toFloat(), mTextPaint)
+        canvas.drawText(
+            startDegree.toString(),
+            (mCenterX - x).toFloat(),
+            (cY + x).toFloat(),
+            mTextPaint
+        )
         canvas.drawText((startDegree + 2).toString(), mCenterX - c, cY + 10f, mTextPaint)
-        canvas.drawText((startDegree + 4).toString(), (mCenterX - x).toFloat(), (cY - x + 10).toFloat(), mTextPaint)
+        canvas.drawText(
+            (startDegree + 4).toString(),
+            (mCenterX - x).toFloat(),
+            (cY - x + 10).toFloat(),
+            mTextPaint
+        )
         canvas.drawText((startDegree + 6).toString(), mCenterX, cY - c + 10, mTextPaint)
-        canvas.drawText((startDegree + 8).toString(), (mCenterX + x).toFloat(), (cY - x + 10).toFloat(), mTextPaint)
+        canvas.drawText(
+            (startDegree + 8).toString(),
+            (mCenterX + x).toFloat(),
+            (cY - x + 10).toFloat(),
+            mTextPaint
+        )
         canvas.drawText((startDegree + 10).toString(), mCenterX + c, cY + 10f, mTextPaint)
-        canvas.drawText((startDegree + 12).toString(), (mCenterX + x).toFloat(), (cY + x).toFloat(), mTextPaint)
+        canvas.drawText(
+            (startDegree + 12).toString(),
+            (mCenterX + x).toFloat(),
+            (cY + x).toFloat(),
+            mTextPaint
+        )
     }
 
 
