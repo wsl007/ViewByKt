@@ -64,7 +64,9 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 
         val halfW = width / 2f
         val halfH = height / 2f
+        // preTranslate方法的作用是在旋转之间先把内容移动,使旋转中心为中间
         rotateMatrix.preTranslate(-halfW, -halfH)
+        // postTranslate方法是在变换之后再将内容移动,回到原来位置
         rotateMatrix.postTranslate(halfW, halfH)
         canvas.concat(rotateMatrix)
 
@@ -94,8 +96,8 @@ constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        anim()
-        anim?.start()
+//        anim()
+//        anim?.start()
     }
 
     override fun onDetachedFromWindow() {
