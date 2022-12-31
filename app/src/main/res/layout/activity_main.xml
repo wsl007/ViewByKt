@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -12,9 +13,9 @@
                 android:orientation="vertical">
 
             <com.wsl.viewbykt.view.SwordLoadingView
-                    android:layout_gravity="center_horizontal"
                     android:layout_width="80dp"
-                    android:layout_height="80dp" />
+                    android:layout_height="80dp"
+                    android:layout_gravity="center_horizontal" />
 
             <Button
                     android:id="@+id/btn"
@@ -39,6 +40,14 @@
                     app:ss_leftText="man"
                     app:ss_rightIcon="@drawable/ic_woman"
                     app:ss_rightText="woman" />
+
+            <com.wsl.viewbykt.view.ColorTrackTextView
+                    android:textSize="20sp"
+                    android:text="Hello World"
+                    app:originColor="@android:color/background_dark"
+                    app:changeColor="@android:color/holo_red_light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>
