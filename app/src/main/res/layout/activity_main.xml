@@ -12,6 +12,14 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+            <com.wsl.viewbykt.view.XfermodeView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+
+            <com.wsl.viewbykt.view.AvatarView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"/>
+
             <com.wsl.viewbykt.view.PieView
                     android:layout_width="match_parent"
                     android:layout_height="400dp"/>
